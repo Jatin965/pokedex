@@ -17,6 +17,6 @@ datasource db {
 model Pokemon {
   id     Int      @id @default(autoincrement())
   name   String   @unique
-  types  String[]
+  types  String
   sprite String
 }
