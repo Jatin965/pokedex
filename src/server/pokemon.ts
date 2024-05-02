@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { router, publicProcedure } from "./trpc";
 import { z } from "zod";
+import { parseTypes } from "@/utils/helpers";
 
 const prisma = new PrismaClient();
 
@@ -14,7 +15,7 @@ export const pokemonRouter = router({
       ? {
           id: pokemon.id,
           name: pokemon.name,
-          types: pokemon.types.split(","),
+          types: parseTypes(pokemon.types),
           sprite: pokemon.sprite,
         }
       : null;
@@ -33,7 +34,7 @@ export const pokemonRouter = router({
       return pokemon.map((p) => ({
         id: p.id,
         name: p.name,
-        types: p.types.split(","),
+        types: parseTypes(p.types),
         sprite: p.sprite,
       }));
     }),
@@ -42,7 +43,7 @@ export const pokemonRouter = router({
     return pokemon.map((p) => ({
       id: p.id,
       name: p.name,
-      types: p.types.split(","),
+      types: parseTypes(p.types),
       sprite: p.sprite,
     }));
   }),
