@@ -38,13 +38,29 @@ export const pokemonRouter = router({
         sprite: p.sprite,
       }));
     }),
-  getAllPokemon: publicProcedure.query(async () => {
-    const pokemon = await prisma.pokemon.findMany();
-    return pokemon.map((p) => ({
-      id: p.id,
-      name: p.name,
-      types: parseTypes(p.types),
-      sprite: p.sprite,
-    }));
-  }),
+  getAllPokemon: publicProcedure
+    .input(
+      z
+        .object({
+          type: z.string().optional(),
+        })
+        .optional()
+    )
+    .query(async ({ input }) => {
+      const typeFilter = input?.type;
+
+      let pokemon = await prisma.pokemon.findMany();
+      if (typeFilter) {
+        pokemon = pokemon.filter((p) => {
+          const pTypes = parseTypes(p.types);
+          return pTypes.includes(typeFilter);
+        });
+      }
+      return pokemon.map((p) => ({
+        id: p.id,
+        name: p.name,
+        types: parseTypes(p.types),
+        sprite: p.sprite,
+      }));
+    }),
 });

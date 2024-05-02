@@ -9,17 +9,10 @@ import { Container, Typography, CircularProgress, Box } from "@mui/material";
 const FilterablePokedexTable = () => {
   const [selectedType, setSelectedType] = useState<string | undefined>("");
   const {
-    data: allPokemon,
+    data: pokemonArray,
     isLoading,
     isError,
-  } = trpc.pokemon.getAllPokemon.useQuery();
-
-  const filteredPokemon = allPokemon?.filter((pokemon) => {
-    console.log("Types", typeof [...pokemon.types], [...pokemon.types]);
-    return selectedType ? [...pokemon.types].includes(selectedType) : true;
-  });
-
-  console.log("filteredPokemon", filteredPokemon);
+  } = trpc.pokemon.getAllPokemon.useQuery({ type: selectedType });
 
   return (
     <Container maxWidth="lg">
@@ -37,7 +30,7 @@ const FilterablePokedexTable = () => {
       ) : isError ? (
         <Typography color="error">Error fetching Pokémon.</Typography>
       ) : (
-        <PokemonGrid pokemonArray={filteredPokemon || []} />
+        <PokemonGrid pokemonArray={pokemonArray || []} />
       )}
     </Container>
   );

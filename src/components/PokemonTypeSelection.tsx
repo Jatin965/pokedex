@@ -20,9 +20,9 @@ const PokemonTypeSelection: FC<PokemonTypeSelectionProps> = ({
       <MenuItem value="">
         <em>All</em>
       </MenuItem>
-      <MenuItem value="grass">Grass</MenuItem>
-      <MenuItem value="fire">Fire</MenuItem>
-      <MenuItem value="water">Water</MenuItem>
+      <MenuItem value="Grass">Grass</MenuItem>
+      <MenuItem value="Fire">Fire</MenuItem>
+      <MenuItem value="Water">Water</MenuItem>
     </Select>
   </FormControl>
 );
