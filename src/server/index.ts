@@ -1,10 +1,8 @@
-import { publicProcedure, router } from "./trpc";
+import { pokemonRouter } from "./pokemon";
+import { router } from "./trpc";
 
 export const appRouter = router({
-  getPokemon: publicProcedure.query(async () => {
-    return "Pokemon"
-  })
-})
-
+  pokemon: pokemonRouter,
+});
 
 export type AppRouter = typeof appRouter;
