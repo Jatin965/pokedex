@@ -1,17 +1,14 @@
+"use client";
+
 import { trpc } from "../../utils/trpc";
 import PokemonRow from "../../components/PokemonRow";
 import { Box, CircularProgress } from "@mui/material";
+import { useState } from "react";
 
-interface PageProps {
-  params: {
-    name: string;
-  };
-}
+const PokemonPage = () => {
+  const [name, setName] = useState("pikachu");
 
-const PokemonPage = ({ params }: PageProps) => {
-  const { name } = params;
-
-  console.log("name", name)
+  console.log("name", name);
 
   const {
     data: pokemon,

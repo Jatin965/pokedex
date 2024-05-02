@@ -6,9 +6,10 @@ const prisma = new PrismaClient();
 
 export const pokemonRouter = router({
   getPokemonByName: publicProcedure.input(z.string()).query(async ({ input }) => {
-    const pokemon = await prisma.pokemon.findUnique({
-      where: { name: input },
-    });
+    const lowerInput = input.toLowerCase(); // Convert input to lowercase
+    const pokemons = await prisma.pokemon.findMany(); // Fetch all pokemons
+    const pokemon = pokemons.find((p) => p.name.toLowerCase() === lowerInput); // Find by lowercase name
+
     return pokemon
       ? {
           id: pokemon.id,
@@ -18,6 +19,7 @@ export const pokemonRouter = router({
         }
       : null;
   }),
+
   getPokemonByNames: publicProcedure
     .input(z.array(z.string()))
     .query(async ({ input }) => {
