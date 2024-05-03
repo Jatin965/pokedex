@@ -77,7 +77,7 @@ const PokemonPage = () => {
       </Stack>
       {isLoading ? (
         <Box display="flex" justifyContent="center">
-          <CircularProgress />
+          <CircularProgress sx={{marginTop: "10%"}} />
         </Box>
       ) : error || !pokemon ? (
         <Typography color="error" variant="h4">
