@@ -1,8 +1,32 @@
 "use client";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { trpc } from "../../utils/trpc";
 import PokemonGrid from "../../components/PokemonGrid"; // Make sure this path is correct
-import { Container } from "@mui/material";
+import {
+  Autocomplete,
+  Box,
+  CircularProgress,
+  Container,
+  TextField,
+  styled,
+} from "@mui/material";
+import { pokemonNames } from "@/utils/staticData";
+
+const StyledTextField = styled(TextField)({
+  "& .MuiOutlinedInput-root": {
+    borderRadius: "12px",
+    "& fieldset": {
+      borderColor: "rgba(0, 0, 0, 0.23)",
+    },
+    "&:hover fieldset": {
+      borderColor: "#4A90E2",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#4A90E2",
+      borderWidth: "2px",
+    },
+  },
+});
 
 const PokemonListPage = () => {
   const [names, setNames] = useState<string[]>(["Pikachu", "Charmander"]);
@@ -19,14 +43,34 @@ const PokemonListPage = () => {
     enabled: names?.length > 0,
   });
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>An error occurred: {error.message}</p>;
-  if (!pokemonArray || pokemonArray.length === 0) return <p>No Pokémon found</p>;
-
   return (
     <Container maxWidth="md">
-      <button onClick={handleFetch}>Fetch Pokémon</button>
-      <PokemonGrid pokemonArray={pokemonArray} />
+      <Fragment>
+        <Autocomplete
+          multiple
+          disableClearable
+          id="tags-outlined"
+          options={pokemonNames}
+          defaultValue={names}
+          onChange={(e, newVal) => setNames(newVal)}
+          filterSelectedOptions
+          renderInput={(params) => (
+            <StyledTextField
+              {...params}
+              label="Search Pokemons"
+              placeholder="Search Pokemons"
+            />
+          )}
+        />
+
+        {isLoading ? (
+          <Box display="flex" justifyContent="center" mt={4}>
+            <CircularProgress sx={{ marginTop: "10%" }} />
+          </Box>
+        ) : (
+          <PokemonGrid pokemonArray={pokemonArray ?? []} />
+        )}
+      </Fragment>
     </Container>
   );
 };
