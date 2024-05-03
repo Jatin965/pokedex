@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { trpc } from "../../utils/trpc";
 import PokemonGrid from "../../components/PokemonGrid"; // Make sure this path is correct
+import { Container } from "@mui/material";
 
 const PokemonListPage = () => {
   const [names, setNames] = useState<string[]>(["Pikachu", "Charmander"]);
@@ -23,10 +24,10 @@ const PokemonListPage = () => {
   if (!pokemonArray || pokemonArray.length === 0) return <p>No Pokémon found</p>;
 
   return (
-    <div>
+    <Container maxWidth="md">
       <button onClick={handleFetch}>Fetch Pokémon</button>
       <PokemonGrid pokemonArray={pokemonArray} />
-    </div>
+    </Container>
   );
 };
 

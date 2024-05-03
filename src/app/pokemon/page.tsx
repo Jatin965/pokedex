@@ -2,7 +2,7 @@
 
 import { trpc } from "../../utils/trpc";
 import PokemonRow from "../../components/PokemonRow";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Container } from "@mui/material";
 import { useState } from "react";
 
 const PokemonPage = () => {
@@ -30,7 +30,11 @@ const PokemonPage = () => {
     return <div>Pokemon not found or there was an error fetching the pokemon.</div>;
   }
 
-  return <PokemonRow pokemon={pokemon} />;
+  return (
+    <Container maxWidth="md">
+      <PokemonRow pokemon={pokemon} />
+    </Container>
+  );
 };
 
 export default PokemonPage;

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Providers from "@/components/providers/TRPCProviders";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import AppAppBar from "@/components/nav/AppAppBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
+        <AppAppBar />
         <body className={inter.className}>{children}</body>
       </Providers>
     </html>

@@ -12,7 +12,7 @@ type PokemonGridProps = {
 };
 
 const PokemonGrid: FC<PokemonGridProps> = ({ pokemonArray }) => (
-  <Grid container spacing={2} justifyContent="stretch" sx={{marginTop: "50px"}}>
+  <Grid container spacing={2} justifyContent="stretch" sx={{marginTop: "20px"}}>
     {pokemonArray.map((pokemon) => (
       <Grid item key={pokemon.id} sx={{width: "100%", padding: "0 !important"}}>
         <PokemonRow pokemon={pokemon} />

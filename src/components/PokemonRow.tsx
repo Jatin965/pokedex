@@ -1,5 +1,13 @@
 import { FC } from "react";
-import { Card, CardMedia, CardContent, Typography, Box, Chip } from "@mui/material";
+import {
+  Card,
+  CardMedia,
+  CardContent,
+  Typography,
+  Box,
+  Chip,
+  Divider,
+} from "@mui/material";
 
 type PokemonRowProps = {
   pokemon: {
@@ -15,6 +23,7 @@ const PokemonRow: FC<PokemonRowProps> = ({ pokemon }) => (
     sx={{
       display: "flex",
       alignItems: "center",
+      columnGap: "15px",
       width: "100%",
       margin: 1,
       borderRadius: "12px",
@@ -25,9 +34,9 @@ const PokemonRow: FC<PokemonRowProps> = ({ pokemon }) => (
       component="img"
       sx={{
         width: "auto",
-        maxHeight: 300,
+        maxHeight: 250,
         height: "100%",
-        maxWidth: 300,
+        maxWidth: 250,
         padding: "40px 80px",
       }}
       image={pokemon.sprite}
@@ -36,14 +45,25 @@ const PokemonRow: FC<PokemonRowProps> = ({ pokemon }) => (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <CardContent sx={{ flex: "1 0 auto" }}>
         <Typography variant="h6">
-          {pokemon.id.toString().padStart(4, "0")}
+          #{pokemon.id.toString().padStart(4, "0")}
         </Typography>
+        <Divider sx={{ opacity: 0.9, margin: "10px 0" }} />
         <Typography variant="h2">{pokemon.name}</Typography>
         <Typography variant="subtitle1" color="text.secondary">
           Types:
         </Typography>
         {pokemon.types.map((type) => (
-          <Chip label={type} />
+          <Chip
+            label={type}
+            variant="outlined"
+            sx={{
+              borderRadius: "5px",
+              marginRight: "4px",
+              paddingInline: "10px",
+              background: "rgba(33, 33, 33, 0.9)",
+              color: "#fff",
+            }}
+          />
         ))}
       </CardContent>
     </Box>
