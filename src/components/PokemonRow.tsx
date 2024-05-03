@@ -52,9 +52,10 @@ const PokemonRow: FC<PokemonRowProps> = ({ pokemon }) => (
         <Typography variant="subtitle1" color="text.secondary">
           Types:
         </Typography>
-        {pokemon.types.map((type) => (
+        {pokemon.types.map((type, index) => (
           <Chip
             label={type}
+            key={index}
             variant="outlined"
             sx={{
               borderRadius: "5px",
