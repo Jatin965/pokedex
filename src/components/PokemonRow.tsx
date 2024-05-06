@@ -58,7 +58,6 @@ const PokemonRow: FC<PokemonRowProps> = ({ pokemon }) => (
             key={index}
             variant="outlined"
             sx={{
-              borderRadius: "5px",
               marginRight: "4px",
               paddingInline: "10px",
               background: "rgba(33, 33, 33, 0.9)",
